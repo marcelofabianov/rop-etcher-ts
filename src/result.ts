@@ -3,8 +3,6 @@ interface Result<S, E> {
   fail(): this is Err<E>
   unwrap(): S
   error(): E
-  map<T>(fn: (value: S) => T): Result<T, E>
-  mapErr<F>(fn: (error: E) => F): Result<S, F>
 }
 
 class Ok<S> implements Result<S, never> {
@@ -25,18 +23,6 @@ class Ok<S> implements Result<S, never> {
   error(): never {
     throw new Error('Cannot call error() on an Ok')
   }
-
-  map<T>(fn: (value: S) => T): Result<T, never> {
-    return new Ok(fn(this.value))
-  }
-
-  mapErr<F>(_fn: (error: never) => F): Result<S, never> {
-    return this
-  }
-
-  flatMap<T, F>(fn: (value: S) => Result<T, F>): Result<T, F> {
-    return fn(this.value)
-  }
 }
 
 class Err<E> implements Result<never, E> {
@@ -56,18 +42,6 @@ class Err<E> implements Result<never, E> {
 
   error(): E {
     return this.value
-  }
-
-  map<T>(_fn: (value: never) => T): Result<T, E> {
-    return this
-  }
-
-  mapErr<F>(fn: (error: E) => F): Result<never, F> {
-    return new Err(fn(this.value))
-  }
-
-  flatMap<T, F>(_fn: (value: never) => Result<T, F>): Result<T, E> {
-    return this
   }
 }
 

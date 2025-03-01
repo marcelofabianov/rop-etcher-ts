@@ -1,4 +1,4 @@
-import { Err, Ok, Result } from '@/etcher'
+import { Err, Ok, Result } from '@/result'
 
 type MathError = { message: string }
 
@@ -27,9 +27,7 @@ const sum = function (
 }
 
 function main(): void {
-  const result = divide(10, 2)
-    .map((value) => sum(value, 5))
-    .mapErr((err) => ({ message: `Erro tratado: ${err.message}` }))
+  const result = sum(20, 2)
 
   if (result.ok()) {
     console.log('Success:', result.unwrap())
@@ -37,9 +35,9 @@ function main(): void {
     console.error('Failure:', result.error())
   }
 
-  const result2 = divide(20, 2)
+  const result2 = divide(20, 0)
 
-  if (result.ok()) {
+  if (result2.ok()) {
     console.log('Success:', result2.unwrap())
   } else {
     console.error('Failure:', result2.error())
