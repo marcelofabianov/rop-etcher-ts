@@ -1,0 +1,19 @@
+{
+  "name": "homefix",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/main.ts",
+    "lint:fix": "prettier -w src"
+  },
+  "author": "Marcelo Fabiano <marcelofabianov@gmail.com>",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "prettier": "^3.5.2",
+    "tsx": "4.19.3",
+    "typescript": "^5.7.3"
+  }
+}
