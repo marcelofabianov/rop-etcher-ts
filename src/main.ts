@@ -6,10 +6,6 @@ class DivisionByZeroError implements MathError {
   message = 'Division by zero'
 }
 
-class NegativeDivisionError implements MathError {
-  message = 'Negative division'
-}
-
 const divide = function (
   n: number,
   divisor: number,
@@ -19,22 +15,7 @@ const divide = function (
     : new Ok(n / divisor)
 }
 
-const sum = function (
-  a: number,
-  b: number,
-): Result<number, NegativeDivisionError> {
-  return a < 0 || b < 0 ? new Err(new NegativeDivisionError()) : new Ok(a + b)
-}
-
 function main(): void {
-  const result = sum(20, 2)
-
-  if (result.ok()) {
-    console.log('Success:', result.unwrap())
-  } else {
-    console.error('Failure:', result.error())
-  }
-
   const result2 = divide(20, 0)
 
   if (result2.ok()) {
